@@ -18,6 +18,7 @@ class RegisterController extends GetxController {
   final TextEditingController alamatController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final loading = false.obs;
+  final isPasswordVisible = false.obs;
 
   //TODO: Implement RegisterController
 
@@ -77,5 +78,9 @@ class RegisterController extends GetxController {
       loading(false);
       Get.snackbar("Error", e.toString(), backgroundColor: Colors.red);
     }
+  }
+  void togglePasswordVisibility() {
+    // Ubah status password (terlihat atau tidak) saat tombol "eye" ditekan
+    isPasswordVisible.value = !isPasswordVisible.value;
   }
 }

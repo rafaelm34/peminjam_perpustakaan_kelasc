@@ -49,7 +49,7 @@ class DataPinjam {
   DataPinjam({
       this.id, 
       this.userId, 
-      this.bookId, 
+      this.bukuId,
       this.tanggalPinjam, 
       this.tanggalKembali, 
       this.status, 
@@ -61,7 +61,7 @@ class DataPinjam {
   DataPinjam.fromJson(dynamic json) {
     id = json['id'];
     userId = json['user_id'];
-    bookId = json['book_id'];
+    bukuId = json['buku_id'];
     tanggalPinjam = json['tanggal_pinjam'];
     tanggalKembali = json['tanggal_kembali'];
     status = json['status'];
@@ -72,7 +72,7 @@ class DataPinjam {
   }
   int? id;
   String? userId;
-  String? bookId;
+  String? bukuId;
   String? tanggalPinjam;
   String? tanggalKembali;
   String? status;
@@ -85,7 +85,7 @@ class DataPinjam {
     final map = <String, dynamic>{};
     map['id'] = id;
     map['user_id'] = userId;
-    map['book_id'] = bookId;
+    map['buku_id'] = bukuId;
     map['tanggal_pinjam'] = tanggalPinjam;
     map['tanggal_kembali'] = tanggalKembali;
     map['status'] = status;

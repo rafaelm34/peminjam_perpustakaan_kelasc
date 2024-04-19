@@ -17,20 +17,17 @@ class BookView extends GetView<BookController> {
           title: const Text('BookView'),
           centerTitle: true,
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () => Get.toNamed(Routes.BOOK), child: Icon(Icons.add),
-        // ),
         body: controller.obx(
             (state) => ListView.separated(
                 itemCount: state!.length,
                 itemBuilder: (context, index) {
-                  DataBook dataBook = state[index];
+                  DataBook dataBook = state [index];
                   return ListTile(
                     title: Text("${dataBook.judul}"),
                     subtitle: Text(
                         "Penulis ${dataBook.penulis}\n${dataBook.penerbit} - ${dataBook.tahunTerbit}"),
                     trailing: ElevatedButton(onPressed: ()=> Get.toNamed(Routes.ADD_PEMINJAMAN, parameters: {
-                      'id' : (dataBook.id ??0).toString(),'judul' :dataBook.judul ??'-'
+                      'id' : (dataBook.bukuId ??0).toString(),'judul' :dataBook.judul ??'-'
                     }),
                       child: Text("Pinjam"),),
                   );

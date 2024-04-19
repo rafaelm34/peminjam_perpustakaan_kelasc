@@ -1,21 +1,22 @@
 /// status : 200
 /// message : "Login Success"
-/// data : {"id":2,"username":"said","nama":"said","telp":"085","alamat":"alamat","role":"PEMINJAM","created_at":"2024-01-09T10:00:57.000000Z","updated_at":"2024-01-09T10:00:57.000000Z"}
+/// data : {"id":1,"username":"testing","nama":"Romli","telp":"085334","alamat":"Solo","role":"PETUGAS","created_at":"2024-01-09T01:55:16.000000Z","updated_at":"2024-01-09T01:55:16.000000Z"}
 
 class ResponseLogin {
   ResponseLogin({
-      this.status, 
-      this.message, 
-      this.data,});
+    this.status,
+    this.message,
+    this.data,});
 
   ResponseLogin.fromJson(dynamic json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? DataLogin.fromJson(json['data']) : null;
+
   }
   int? status;
   String? message;
-  Data? data;
+  DataLogin? data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -29,55 +30,51 @@ class ResponseLogin {
 
 }
 
-/// id : 2
-/// username : "said"
-/// nama : "said"
-/// telp : "085"
-/// alamat : "alamat"
-/// role : "PEMINJAM"
-/// created_at : "2024-01-09T10:00:57.000000Z"
-/// updated_at : "2024-01-09T10:00:57.000000Z"
+/// id : 1
+/// username : "testing"
+/// nama : "Romli"
+/// telp : "085334"
+/// alamat : "Solo"
+/// role : "PETUGAS"
+/// created_at : "2024-01-09T01:55:16.000000Z"
+/// updated_at : "2024-01-09T01:55:16.000000Z"
 
-class Data {
-  Data({
-      this.id, 
-      this.username, 
-      this.nama, 
-      this.telp, 
-      this.alamat, 
-      this.role, 
-      this.createdAt, 
-      this.updatedAt,});
+class DataLogin {
+  DataLogin({
+    this.id,
+    this.username,
+    this.password,
+    this.email,
+    this.namaLengkap,
+    this.alamat,
+    this.roleId,});
 
-  Data.fromJson(dynamic json) {
-    id = json['id'];
+  DataLogin.fromJson(dynamic json) {
+    id = json['user_id'];
     username = json['username'];
-    nama = json['nama'];
-    telp = json['telp'];
+    password = json['password'];
+    email = json['email'];
+    namaLengkap = json['nama_lengkap'];
     alamat = json['alamat'];
-    role = json['role'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    roleId = json['role_id'];
   }
   int? id;
   String? username;
-  String? nama;
-  String? telp;
+  String? password;
+  String? email;
+  String? namaLengkap;
   String? alamat;
-  String? role;
-  String? createdAt;
-  String? updatedAt;
+  int? roleId;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;
     map['username'] = username;
-    map['nama'] = nama;
-    map['telp'] = telp;
+    map['password'] = password;
+    map['email'] = email;
+    map['nama_lengkap'] = namaLengkap;
     map['alamat'] = alamat;
-    map['role'] = role;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
+    map['role_id'] = roleId;
     return map;
   }
 
