@@ -222,7 +222,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                   builder: (context, constraints) => Container(
                     width: constraints.maxWidth,
                     decoration: BoxDecoration(
-                      color: Colors.blueGrey,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(5.0),
                       boxShadow: [
                         BoxShadow(
@@ -241,7 +241,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                           style: GoogleFonts.poppins(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: main_color,
                           ),
                         ),
                         Container(
@@ -284,7 +284,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                   Get.toNamed(
                     Routes.ADD_PEMINJAMAN,
                     parameters: {
-                      'id': '${Get.parameters['buku_id'].toString()}',
+                      'id': '${Get.parameters['id'].toString()}',
                       'judul': '${Get.parameters['judul']}',
                       'image': '${Get.parameters['image']}',
                       'penulis': '${Get.parameters['penulis']}',
@@ -357,14 +357,14 @@ class _ExpandableTextState extends State<ExpandableText> {
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.lato(
               fontSize: 15,
-              color: text_white,
+              color: Colors.black,
             ),
           ),
           secondChild: Text(
             widget.text,
             style: GoogleFonts.lato(
               fontSize: 15,
-              color: text_white,
+              color: Colors.black,
             ),
           ),
         ),

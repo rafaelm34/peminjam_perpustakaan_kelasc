@@ -55,7 +55,7 @@ class RegisterController extends GetxController {
               "password": passwordController.text.toString()
             }));
 
-        if (response.statusCode == 201) {
+        if (response.statusCode == 200) {
           Get.back();
           // Get.offAllNamed(Routes.LOGIN);
         } else {

@@ -27,7 +27,7 @@ class ListPeminjamanView extends GetView<ListPeminjamanController> {
         backgroundColor: main_color,
         automaticallyImplyLeading: false,
       ),
-      body: listPeminjamanController.obx((state) => ListView.builder(
+      body: Obx (() => ListView.builder(
         // scrollDirection: Axis.horizontal,
         itemCount: listPeminjamanController.dataPinjamList.length,
         itemBuilder: (context, index) {
@@ -39,7 +39,7 @@ class ListPeminjamanView extends GetView<ListPeminjamanController> {
               width: 500,
               // title: Text('${dataPeminjaman.buku!.judul}'),
               decoration: BoxDecoration(
-                color: Colors.white60,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(13.0),
                 boxShadow: [
                   BoxShadow(
@@ -74,7 +74,7 @@ class ListPeminjamanView extends GetView<ListPeminjamanController> {
                       Padding(
                         padding: const EdgeInsets.only(left: 13.0, top: 12.0, bottom: 5.0),
                         child: Container(
-                          width: 230,
+                          width: 200,
                           // height: 120,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +130,7 @@ class ListPeminjamanView extends GetView<ListPeminjamanController> {
                           width: 95,
                           height: 25,
                           decoration: BoxDecoration(
-                            color: /*Colors.red*/Color(0xFFFAEDF0),
+                            color: second_color,
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Center(
@@ -139,7 +139,7 @@ class ListPeminjamanView extends GetView<ListPeminjamanController> {
                               style: GoogleFonts.poppins(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w700,
-                                color: (dataPinjam.status == 'DIPINJAM') ? Colors.blue : Colors.red,
+                                color: (dataPinjam.status == 'DIPINJAM') ? Colors.white : Colors.greenAccent,
                               ),
                             ),
                           ),

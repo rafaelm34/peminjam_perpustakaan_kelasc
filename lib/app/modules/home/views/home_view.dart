@@ -117,16 +117,16 @@ class screenHome extends StatelessWidget {
                         SizedBox(width: 10),
                       ],
                     ),
-                    Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.person),
-                          onPressed: () {
-                            Get.toNamed(Routes.PROFILE);
-                          },
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     IconButton(
+                    //       icon: Icon(Icons.person),
+                    //       onPressed: () {
+                    //         Get.toNamed(Routes.PROFILE);
+                    //       },
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
                 SizedBox(
@@ -138,7 +138,7 @@ class screenHome extends StatelessWidget {
                       child: TextField(
                         decoration: InputDecoration(
                           prefixIcon:
-                          Icon(Icons.search, color: second_color),
+                          Icon(Icons.search, color: main_color),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                             borderSide: BorderSide(color: Colors.white70),
@@ -210,7 +210,7 @@ class screenHome extends StatelessWidget {
                       DataBook dataBook = homeController.bookList[index];
                       return InkWell(
                         onTap: () => Get.toNamed(Routes.DETAIL_BUKU, parameters: {
-                          'id': (dataBook.bukuId ?? 0).toString(),
+                          'id': '${dataBook.bukuId}',
                           'judul': '${dataBook.judul}',
                           'image': '${dataBook.image}',
                           'penulis': '${dataBook.penulis}',

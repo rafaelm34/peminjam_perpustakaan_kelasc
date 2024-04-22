@@ -9,7 +9,8 @@ void main() {
   GetStorage.init();
   runApp(
     GetMaterialApp(
-      title: "Application",
+    debugShowCheckedModeBanner: false,
+      title: "Digital Pustaka",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
     ),

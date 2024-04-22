@@ -55,7 +55,7 @@ class DataPinjam {
   DataPinjam.fromJson(dynamic json) {
     peminjamanId = json['peminjaman_id'];
     userId = json['user_id'];
-    bukuId = json['buku_id'];
+    bukuId = json['buku_id'].toString();
     tanggalPinjam = json['tanggal_pinjam'];
     tanggalKembali = json['tanggal_kembali'];
     status = json['status'];
