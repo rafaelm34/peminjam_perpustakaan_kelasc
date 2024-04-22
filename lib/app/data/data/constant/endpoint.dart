@@ -3,7 +3,8 @@ class Endpoint {
       // "http://192.168.1.2:3001/";
       // "http://192.168.219.182:3001/";
       // "http://192.168.6.215:3001/";
-      "http://192.168.1.7:3001/";
+      // "http://192.168.1.3:3001/";
+      "http://192.168.5.152:3001/";
 
 
   static const String register = "${baseUrlApi}register";

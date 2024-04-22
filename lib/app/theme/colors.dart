@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 final Color main_color = HexColor('#286291');
+final Color second_color = HexColor('#00C49A');
 final Color background = Color(0xFFEAEAEA);
 final Color text_white = Color(0xFFFDFDFD);
 final Color text_bold = Color(0xFF006AC0);

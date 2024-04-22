@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:peminjam_perpustakaan_kelasc/app/routes/app_pages.dart';
 import 'package:peminjam_perpustakaan_kelasc/app/theme/colors.dart';
@@ -27,26 +26,7 @@ class ProfileView extends GetView<ProfileController> {
           ),
           centerTitle: true,
           backgroundColor: main_color,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: text_white,
-            ),
-            onPressed: () {
-              Get.toNamed(Routes.HOME);
-            },
-          ),
-          // actions: [
-          //   IconButton(
-          //     icon: Icon(
-          //       Icons.settings,
-          //       color: Colors.white,
-          //     ),
-          //     onPressed: () {
-          //       Get.toNamed(Routes.EDIT_PROFILE);
-          //     },
-          //   ),
-          // ],
+          automaticallyImplyLeading: false, // Menyembunyikan tombol panah kembali
         ),
         backgroundColor: background,
         body: ListView(
@@ -61,7 +41,7 @@ class ProfileView extends GetView<ProfileController> {
                   child: Column(
                     children: [
                       CircleAvatar(
-                        radius: 30,
+                        radius: 40,
                         backgroundImage: AssetImage("assets/images/profile.png"),
                       ),
                       SizedBox(height: 5),
@@ -148,7 +128,7 @@ class ProfileView extends GetView<ProfileController> {
               ),
             ),
             ListTile(
-              leading: Icon(Iconsax.logout, color: text_button),
+              leading: Icon(Icons.logout, color: text_button),
               title: Text(
                 "Logout",
                 style: GoogleFonts.lato(

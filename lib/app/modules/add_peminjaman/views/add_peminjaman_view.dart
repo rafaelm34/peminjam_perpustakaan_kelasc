@@ -1,12 +1,10 @@
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:peminjam_perpustakaan_kelasc/app/routes/app_pages.dart';
+import 'package:get/get.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:peminjam_perpustakaan_kelasc/app/theme/colors.dart';
-
+import '../../../routes/app_pages.dart';
 import '../controllers/add_peminjaman_controller.dart';
 
 class AddPeminjamanView extends GetView<AddPeminjamanController> {
@@ -24,7 +22,7 @@ class AddPeminjamanView extends GetView<AddPeminjamanController> {
             fontSize: 20,
           ),
         ),
-        // centerTitle: true,
+        centerTitle: true,
         backgroundColor: main_color,
         leading: IconButton(
           icon: Icon(
@@ -33,7 +31,7 @@ class AddPeminjamanView extends GetView<AddPeminjamanController> {
           ),
           onPressed: () {
             Get.toNamed(
-              Routes.HOME,
+              Routes.DETAIL_BUKU,
               parameters: {
                 'id': '${Get.parameters['id'].toString()}',
                 'judul': '${Get.parameters['judul']}',
@@ -71,7 +69,7 @@ class AddPeminjamanView extends GetView<AddPeminjamanController> {
                 child: Text(
                   '${Get.parameters['penulis']}',
                   style: GoogleFonts.lato(
-                    color: Colors.black54,
+                    color: Colors.black87,
                     fontSize: 17,
                     fontWeight: FontWeight.w500,
                   ),
@@ -118,79 +116,76 @@ class AddPeminjamanView extends GetView<AddPeminjamanController> {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 20, left: 20),
-                child: Container(
-                  child: Column(
-                    children: [
-                      DateTimePicker(
-                        icon: Icon(Iconsax.calendar_add, color: main_color), // Mengatur warna ikon
-                        controller: controller.tanggalPinjamController,
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2100),
-                        dateLabelText: 'Pilih tanggal pinjam',
-                        dateMask: 'yyyy-MM-dd',
-                        onChanged: (val) => print(val),
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'Tanggal pinjam harus diisi';
-                          }
-                          return null;
-                        },
-                        onSaved: (val) => print(val),
-                        style: TextStyle(color: main_color), // Mengatur warna teks
-                      ),
-                      DateTimePicker(
-                        icon: Icon(Iconsax.calendar_add, color: main_color),
-                        controller: controller.tanggalKembaliController,
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2100),
-                        dateLabelText: 'Pilih tanggal kembali',
-                        dateMask: 'yyyy-MM-dd',
-                        onChanged: (val) => print(val),
-                        validator: (val) {
-                          if (val == null || val.isEmpty) {
-                            return 'Tanggal Kembali harus diisi';
-                          }
-                          return null;
-                        },
-                        onSaved: (val) => print(val),
-                        style: TextStyle(color: main_color),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Obx(
-                                () => controller.loading.value
-                                ? CircularProgressIndicator()
-                                : ElevatedButton(
-                              onPressed: () {
-                                controller.addPeminjaman();
-                              },
-                              child: Text('Tambah'),
-                              style: ElevatedButton.styleFrom(
-                                primary: main_color, // Mengatur warna latar belakang tombol menjadi hijau
-                                textStyle: GoogleFonts.lato(
-                                  color: main_color,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
+                  child: Container(
+                    child: Column(
+                      children: [
+                        DateTimePicker(
+                          icon: Icon(Icons.calendar_month, color: Colors.black), // Mengatur warna ikon
+                          controller: controller.tanggalPinjamController,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100),
+                          dateLabelText: 'Pilih tanggal pinjam',
+                          dateMask: 'yyyy-MM-dd',
+                          onChanged: (val) => print(val),
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Tanggal pinjam harus diisi';
+                            }
+                            return null;
+                          },
+                          onSaved: (val) => print(val),
+                          style: TextStyle(color: Colors.black), // Mengatur warna teks
+                        ),
+                        DateTimePicker(
+                          icon: Icon(Icons.calendar_month, color: Colors.black),
+                          controller: controller.tanggalKembaliController,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2100),
+                          dateLabelText: 'Pilih tanggal kembali',
+                          dateMask: 'yyyy-MM-dd',
+                          onChanged: (val) => print(val),
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Tanggal Kembali harus diisi';
+                            }
+                            return null;
+                          },
+                          onSaved: (val) => print(val),
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Obx(
+                                  () => controller.loading.value
+                                  ? CircularProgressIndicator()
+                                  : ElevatedButton(
+                                onPressed: () {
+                                  controller.addPeminjaman();
+                                },
+                                child: Text('Tambah'),
+                                style: ElevatedButton.styleFrom(
+                                  textStyle: GoogleFonts.lato(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  backgroundColor: main_color
+                                  //  Sesuaikan properti lain sesuai kebutuhan
                                 ),
-                                //  Sesuaikan properti lain sesuai kebutuhan
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
             ],
           )),
     );
   }
 }
-
-

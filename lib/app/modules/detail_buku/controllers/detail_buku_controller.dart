@@ -16,20 +16,16 @@ class DetailBukuController extends GetxController with StateMixin<List<DataBook>
   final TextEditingController tanggalPinjamController = TextEditingController();
   final TextEditingController tanggalKembaliController = TextEditingController();
   // final loading = false.obs;
-
-  // final count = 0.obs;
+  // var isButtonVisible = true.obs;
   // var rekomendasiBookList = <DataBook>[].obs;
   // var ratingTertinggiBookList = <DataBook>[].obs;
-
   final loading = false.obs;
-
   final ScrollController scrollController = ScrollController();
 
   @override
   void onInit() {
     super.onInit();
     getDetailBuku();
-
   }
 
   @override

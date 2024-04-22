@@ -1,12 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:peminjam_perpustakaan_kelasc/app/data/data/model/response_book.dart';
+import 'package:peminjam_perpustakaan_kelasc/app/modules/list_peminjaman/views/list_peminjaman_view.dart';
 import 'package:peminjam_perpustakaan_kelasc/app/modules/profile/controllers/profile_controller.dart';
 import 'package:peminjam_perpustakaan_kelasc/app/routes/app_pages.dart';
+import 'package:peminjam_perpustakaan_kelasc/app/theme/colors.dart';
 
-import '../../peminjaman/views/peminjaman_view.dart';
 import '../../profile/views/profile_view.dart';
 import '../controllers/home_controller.dart';
 
@@ -33,7 +35,7 @@ class _HomeViewStfulState extends State<HomeViewStful> {
   List<Widget> pageViewModel() {
     return [
       screenHome(),
-      PeminjamanView(),
+      ListPeminjamanView(),
       ProfileView(),
     ];
   }
@@ -96,40 +98,75 @@ class screenHome extends StatelessWidget {
     return Scaffold(
       body: ListView(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () {
-                  // Tambahkan logika untuk menangani ketika ikon menu ditekan
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.bookmark),
-                onPressed: () {
-                  // Tambahkan logika untuk menangani ketika ikon notifikasi ditekan
-                },
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
+          Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(color: Colors.white),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image(
+                          image: AssetImage('assets/images/logodp2.png'),
+                          height: 100,
+                          width: 100,
+                        ),
+                        SizedBox(width: 10),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.person),
+                          onPressed: () {
+                            Get.toNamed(Routes.PROFILE);
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
+                SizedBox(
+                    height:
+                    10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          prefixIcon:
+                          Icon(Icons.search, color: second_color),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(color: Colors.white70),
+                          ),
+                          // Mengatur border saat dalam keadaan fokus
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(color: main_color),
+                          ),
+                          hintText: 'Search Book',
+                          hintStyle: TextStyle(color: Color(0xFFD4D7D9)),
+                          filled: true,
+                          fillColor: Color(0xFFF7FAFC),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 5.0),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                  ],
+                ),
+              ],
             ),
           ),
           Container(
             padding: EdgeInsets.all(16.0),
             child: CarouselSlider(
               items: [
-                Image.asset('assets/images/bulan.png', fit: BoxFit.cover),
                 Image.asset('assets/images/bumi.png', fit: BoxFit.cover),
                 Image.asset('assets/images/sebuahseni.png', fit: BoxFit.cover),
                 Image.asset('assets/images/tuhanadadihatimu.png', fit: BoxFit.cover),
@@ -153,6 +190,7 @@ class screenHome extends StatelessWidget {
           Center(
             child: Container(
               padding: EdgeInsets.all(16.0),
+              color: HexColor('#F5F5F5'),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -219,21 +257,23 @@ class screenHome extends StatelessWidget {
                                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                 ),
                                 Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      padding: EdgeInsets.all(0),
-                                      child: Text(
-                                        "9.0",
-                                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
-                                      ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                      size: 15,
                                     ),
-                                    Container(
-                                      padding: EdgeInsets.all(0),
-                                      child: Icon(Icons.star, color: Colors.yellow, size: 20),
+                                    Text(
+                                      '${dataBook.rating}',
+                                      style: GoogleFonts.lato(
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 10),
+                                // SizedBox(height: 10),
                               ],
                             ),
                           ),
@@ -250,6 +290,7 @@ class screenHome extends StatelessWidget {
           Center(
             child: Container(
               padding: EdgeInsets.all(16.0),
+              color: HexColor('#F5F5F5'),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -354,17 +395,19 @@ class screenHome extends StatelessWidget {
                                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                 ),
                                 Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      padding: EdgeInsets.all(0),
-                                      child: Text(
-                                        "9.0",
-                                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w900),
-                                      ),
+                                    Icon(
+                                      Icons.star,
+                                      color: Colors.yellow,
+                                      size: 15,
                                     ),
-                                    Container(
-                                      padding: EdgeInsets.all(0),
-                                      child: Icon(Icons.star, color: Colors.yellow, size: 20),
+                                    Text(
+                                      '${dataBook.rating}',
+                                      style: GoogleFonts.lato(
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ],
                                 ),

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:peminjam_perpustakaan_kelasc/app/data/data/model/response_book.dart';
 import 'package:peminjam_perpustakaan_kelasc/app/modules/detail_buku/controllers/detail_buku_controller.dart';
 import 'package:peminjam_perpustakaan_kelasc/app/theme/colors.dart';
 
@@ -16,7 +14,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
   @override
   Widget build(BuildContext context) {
     final DetailBukuController detailBukuController =
-    Get.put(DetailBukuController());
+        Get.put(DetailBukuController());
     final DetailBukuController controller = Get.find<DetailBukuController>();
     final ScrollController scrollController = ScrollController();
 
@@ -30,6 +28,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
             fontSize: 20,
           ),
         ),
+        centerTitle: true,
         backgroundColor: main_color,
         leading: IconButton(
           icon: Icon(
@@ -52,7 +51,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: card,
+                    color: main_color,
                     borderRadius: BorderRadius.circular(5.0),
                     boxShadow: [
                       BoxShadow(
@@ -63,13 +62,14 @@ class DetailBukuView extends GetView<DetailBukuController> {
                     ],
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 15, bottom: 12),
+                    padding:
+                        const EdgeInsets.only(left: 10, top: 15, bottom: 12),
                     child: Row(
                       children: [
                         Image.network(
                           '${Get.parameters['image']}',
-                          width: 150,
-                          height: 215,
+                          width: 130,
+                          height: 190,
                           fit: BoxFit.cover,
                         ),
                         const SizedBox(
@@ -79,7 +79,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Container(
-                              width: 200,
+                              width: 170,
                               height: 190,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,14 +89,13 @@ class DetailBukuView extends GetView<DetailBukuController> {
                                     style: GoogleFonts.poppins(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
-                                      color: text_bold,
+                                      color: text_white,
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
+                                  SizedBox(height: 10),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Judul Buku    :  ',
@@ -114,11 +113,10 @@ class DetailBukuView extends GetView<DetailBukuController> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
+                                  SizedBox(height: 5),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Penulis            :  ',
@@ -136,37 +134,79 @@ class DetailBukuView extends GetView<DetailBukuController> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 5,
+                                  SizedBox(height: 5),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Tahun Terbit :  ',
+                                        style: GoogleFonts.lato(
+                                          color: text_white,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          '${Get.parameters['tahun_terbit']}',
+                                          style: GoogleFonts.lato(
+                                            color: text_white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 5),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Penerbit         :  ',
+                                        style: GoogleFonts.lato(
+                                          color: text_white,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          '${Get.parameters['penerbit']}',
+                                          style: GoogleFonts.lato(
+                                            color: text_white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 5),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Rating             :  ',
+                                        style: GoogleFonts.lato(
+                                          color: text_white,
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.yellow,
+                                            size: 15,
+                                          ),
+                                          Text(
+                                            '${Get.parameters['rating']}',
+                                            style: GoogleFonts.lato(
+                                              color: text_white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ],
-                              ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Get.toNamed(
-                                  Routes.ADD_PEMINJAMAN,
-                                  parameters: {
-                                    'id': '${Get.parameters['buku_id'].toString()}',
-                                    'judul': '${Get.parameters['judul']}',
-                                    'image': '${Get.parameters['image']}',
-                                    'penulis': '${Get.parameters['penulis']}',
-                                    'penerbit': '${Get.parameters['penerbit']}',
-                                    'tahun_terbit': '${Get.parameters['tahun_terbit']}',
-                                    'deskripsi_buku': '${Get.parameters['deskripsi_buku']}',
-                                    'nama_kategory': '${Get.parameters['nama_kategory']}',
-                                    'rating': '${Get.parameters['rating']}',
-                                  },
-                                );
-                              },
-                              child: Text("Pinjam"),
-                              style: ElevatedButton.styleFrom(
-                                onPrimary: text_button,
-                                primary: button_white,
-                                textStyle: GoogleFonts.lato(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
                               ),
                             ),
                           ],
@@ -182,7 +222,7 @@ class DetailBukuView extends GetView<DetailBukuController> {
                   builder: (context, constraints) => Container(
                     width: constraints.maxWidth,
                     decoration: BoxDecoration(
-                      color: card,
+                      color: Colors.blueGrey,
                       borderRadius: BorderRadius.circular(5.0),
                       boxShadow: [
                         BoxShadow(
@@ -193,102 +233,21 @@ class DetailBukuView extends GetView<DetailBukuController> {
                       ],
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                              right: 10, left: 10, top: 20, bottom: 5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Container(
-                                width: 100,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Tahun Terbit',
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 13,
-                                        color: text_white,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${Get.parameters['tahun_terbit']}',
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 13,
-                                        color: text_bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: 100,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Penerbit',
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 13,
-                                        color: text_white,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${Get.parameters['penerbit']}',
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 13,
-                                        color: text_bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: 100,
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      'Rating',
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 13,
-                                        color: text_white,
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.star,
-                                          color: Colors.yellow,
-                                          size: 15,
-                                        ),
-                                        Text(
-                                          '${Get.parameters['rating']}',
-                                          style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 13,
-                                            color: text_bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                        SizedBox(height: 20),
+                        Text(
+                          'Deskripsi Buku',
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10),
-                          color: line,
+                          color: Colors.black,
                           height: 0.2,
                         ),
                         Padding(
@@ -297,18 +256,10 @@ class DetailBukuView extends GetView<DetailBukuController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Deskripsi Buku : ',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: text_bold,
-                                ),
-                              ),
                               SizedBox(height: 10),
                               Padding(
                                 padding:
-                                const EdgeInsets.only(left: 5, right: 5),
+                                    const EdgeInsets.only(left: 5, right: 5),
                                 child: ExpandableText(
                                   text: '${Get.parameters['deskripsi_buku']}',
                                 ),
@@ -322,6 +273,44 @@ class DetailBukuView extends GetView<DetailBukuController> {
                 ),
               ),
             ],
+          ),
+          Positioned(
+            bottom: 25.0,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: TextButton(
+                onPressed: () {
+                  Get.toNamed(
+                    Routes.ADD_PEMINJAMAN,
+                    parameters: {
+                      'id': '${Get.parameters['buku_id'].toString()}',
+                      'judul': '${Get.parameters['judul']}',
+                      'image': '${Get.parameters['image']}',
+                      'penulis': '${Get.parameters['penulis']}',
+                      'penerbit': '${Get.parameters['penerbit']}',
+                      'tahun_terbit': '${Get.parameters['tahun_terbit']}',
+                      'deskripsi_buku': '${Get.parameters['deskripsi_buku']}',
+                      'nama_kategory': '${Get.parameters['nama_kategory']}',
+                      'rating': '${Get.parameters['rating']}',
+                    },
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    'Pinjam',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                style: TextButton.styleFrom(
+                  backgroundColor: main_color,
+                  minimumSize: Size(250, 60),
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -344,6 +333,12 @@ class ExpandableText extends StatefulWidget {
 
 class _ExpandableTextState extends State<ExpandableText> {
   bool _isExpanded = false;
+
+  void _toggleExpanded() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -376,15 +371,11 @@ class _ExpandableTextState extends State<ExpandableText> {
         SizedBox(height: 8),
         if (_isExpanded || _isOverMaxLines())
           GestureDetector(
-            onTap: () {
-              setState(() {
-                _isExpanded = !_isExpanded;
-              });
-            },
+            onTap: _toggleExpanded,
             child: Text(
               _isExpanded ? 'Show Less' : 'Show More',
               style: TextStyle(
-                color: text_bold,
+                color: second_color,
                 fontSize: 13,
                 fontWeight: FontWeight.bold,
               ),
@@ -408,104 +399,5 @@ class _ExpandableTextState extends State<ExpandableText> {
     )..layout(maxWidth: MediaQuery.of(context).size.width);
 
     return textPainter.didExceedMaxLines;
-  }
-}
-
-
-class BookCover extends StatelessWidget {
-  final String bookTitle;
-  final String bookImage;
-  final VoidCallback onPressed;
-
-  const BookCover({
-    Key? key,
-    required this.bookTitle,
-    required this.bookImage,
-    required this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 1),
-      child: GestureDetector(
-        onTap: onPressed,
-        child: SizedBox(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 6),
-            child: Container(
-              // width: 125,
-              // color: Colors.white,
-              decoration: BoxDecoration(
-                color: button_white,
-                borderRadius: BorderRadius.circular(2.0),
-                //     boxShadow: [
-                //   BoxShadow(
-                //     color: Color.fromRGBO(141, 141, 141, 1.0),
-                //     blurRadius: 2,
-                //     offset: Offset(2, 2),
-                //   ),
-                // ]
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(2.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.network(
-                      bookImage,
-                      width: 130,
-                      height: 180,
-                      fit: BoxFit.cover,
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) {
-                          return child;
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                                  : null,
-                            ),
-                          );
-                        }
-                      },
-                      errorBuilder: (BuildContext context, Object exception,
-                          StackTrace? stackTrace) {
-                        return Center(
-                          child: Icon(
-                            Icons.error_outline,
-                            color: Colors.red,
-                            size: 40,
-                          ),
-                        );
-                      },
-                    ),
-                    SizedBox(height: 6),
-                    Container(
-                      width: 120,
-                      height: 30,
-                      // color: Colors.red,
-                      child: Text(
-                        bookTitle,
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          color: text_button,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }

@@ -1,20 +1,20 @@
+import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:peminjam_perpustakaan_kelasc/app/data/data/constant/endpoint.dart';
 import 'package:peminjam_perpustakaan_kelasc/app/data/data/provider/api_provider.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:peminjam_perpustakaan_kelasc/app/data/data/provider/storage_provider.dart';
-import 'package:peminjam_perpustakaan_kelasc/app/routes/app_pages.dart';
+
+import '../../../routes/app_pages.dart';
 
 class AddPeminjamanController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  // final TextEditingController user_idController = TextEditingController();
+  // final TextEditingController book_idController = TextEditingController();
   final TextEditingController tanggalPinjamController = TextEditingController();
   final TextEditingController tanggalKembaliController = TextEditingController();
-
-
   final loading = false.obs;
-  //TODO: Implement AddPeminjamanController
 
   final count = 0.obs;
   @override
@@ -40,34 +40,27 @@ class AddPeminjamanController extends GetxController {
       if (formKey.currentState!.validate()) {
         final response = await ApiProvider.instance().post(Endpoint.pinjam,
             data: {
-              'id': '${Get.parameters['id'].toString()}',
               "user_id": StorageProvider.read(StorageKey.userId),
-              "buku_id":  int.parse(Get.parameters['id'].toString()),
+              "buku_id": int.tryParse(StorageKey.bukuId),
               "tanggal_pinjam": tanggalPinjamController.text.toString(),
               "tanggal_kembali": tanggalKembaliController.text.toString(),
             });
         if (response.statusCode == 200) {
           Get.toNamed(
-            Routes.HOME,
+            Routes.LIST_PEMINJAMAN,
             parameters: {
-              'id': '${Get.parameters['id']}',
+              'id': '${Get.parameters['id'].toString()}',
               'judul': '${Get.parameters['judul']}',
               'image': '${Get.parameters['image']}',
-              'penulis':
-              '${Get.parameters['penulis']}',
-              'penerbit':
-              '${Get.parameters['penerbit']}',
-              'tahun_terbit':
-              '${Get.parameters['tahun_terbit']}',
-              'deskripsi_buku':
-              '${Get.parameters['deskripsi_buku']}',
-              'nama_kategory':
-              '${Get.parameters['nama_kategory']}',
-              'rating':
-              '${Get.parameters['rating']}',
+              'penulis': '${Get.parameters['penulis']}',
+              'penerbit': '${Get.parameters['penerbit']}',
+              'tahun_terbit': '${Get.parameters['tahun_terbit']}',
+              'deskripsi_buku': '${Get.parameters['deskripsi_buku']}',
+              'nama_kategory': '${Get.parameters['nama_kategory']}',
+              'rating': '${Get.parameters['rating']}',
             },
           );
-          // Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.HOME);
         } else {
           Get.snackbar("Sorry", "Tambah Pinjam Gagal", backgroundColor: Colors.orange);
         }
@@ -91,4 +84,3 @@ class AddPeminjamanController extends GetxController {
 
   void increment() => count.value++;
 }
-

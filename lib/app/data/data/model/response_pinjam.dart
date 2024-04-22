@@ -1,15 +1,15 @@
-/// status : 200
-/// message : "success"
-/// data : [{"id":1,"user_id":2,"book_id":1,"tanggal_pinjam":"2024-01-01 00:00:00","tanggal_kembali":"2024-01-10 00:00:00","status":"DIPINJAM","created_at":"2024-01-09T06:09:06.000000Z","updated_at":"2024-01-09T06:09:06.000000Z","user":{"id":2,"username":"said","nama":"said","telp":"085","alamat":"alamat","role":"PEMINJAM","created_at":"2024-01-09T05:36:44.000000Z","updated_at":"2024-01-09T05:36:44.000000Z"},"book":{"id":1,"kategori_id":1,"judul":"Belajar mengenal angka","penulis":"kusnaidi","penerbit":"PT alangka","tahun_terbit":2024,"created_at":"2024-01-09T05:43:09.000000Z","updated_at":"2024-01-09T05:43:09.000000Z"}}]
+/// Statuscode : 200
+/// message : "SUCCESS"
+/// data : [{"peminjaman_id":1,"user_id":1,"buku_id":1,"tanggal_pinjam":"2024-04-20T17:00:00.000Z","tanggal_kembali":"2024-04-21T17:00:00.000Z","status":"DIPINJAM","buku":{"created_at":"2024-03-31T15:37:47.000Z","updated_at":"2024-03-31T15:37:47.000Z","judul":"Lookism","penulis":"Taejoon Park","penerbit":"Webtoon","tahun_terbit":"2020","image":"image/image_1711899467362.jpeg","deskripsi_buku":"Lookism mengisahkan tentang seorang remaja laki-laki bernama Park Hyung Seok yang mengalami bully penampilannya yang dianggap tidak menarik. Bully yang begitu parah membuatnya memutuskan untuk pindah rumah dan sekolah. Tak disangka, keputusan pindah itu ternyata benar-benar mengubah kehidupan Park Hyung Seok.","rating":"9.7","genre":"Aksi"}}]
 
 class ResponsePinjam {
   ResponsePinjam({
-      this.status, 
-      this.message, 
-      this.data,});
+    this.statuscode,
+    this.message,
+    this.data,});
 
   ResponsePinjam.fromJson(dynamic json) {
-    status = json['status'];
+    statuscode = json['Statuscode'];
     message = json['message'];
     if (json['data'] != null) {
       data = [];
@@ -18,13 +18,13 @@ class ResponsePinjam {
       });
     }
   }
-  int? status;
+  int? statuscode;
   String? message;
   List<DataPinjam>? data;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['status'] = status;
+    map['Statuscode'] = statuscode;
     map['message'] = message;
     if (data != null) {
       map['data'] = data?.map((v) => v.toJson()).toList();
@@ -34,177 +34,116 @@ class ResponsePinjam {
 
 }
 
-/// id : 1
-/// user_id : 2
-/// book_id : 1
-/// tanggal_pinjam : "2024-01-01 00:00:00"
-/// tanggal_kembali : "2024-01-10 00:00:00"
+/// peminjaman_id : 1
+/// user_id : 1
+/// buku_id : 1
+/// tanggal_pinjam : "2024-04-20T17:00:00.000Z"
+/// tanggal_kembali : "2024-04-21T17:00:00.000Z"
 /// status : "DIPINJAM"
-/// created_at : "2024-01-09T06:09:06.000000Z"
-/// updated_at : "2024-01-09T06:09:06.000000Z"
-/// user : {"id":2,"username":"said","nama":"said","telp":"085","alamat":"alamat","role":"PEMINJAM","created_at":"2024-01-09T05:36:44.000000Z","updated_at":"2024-01-09T05:36:44.000000Z"}
-/// book : {"id":1,"kategori_id":1,"judul":"Belajar mengenal angka","penulis":"kusnaidi","penerbit":"PT alangka","tahun_terbit":2024,"created_at":"2024-01-09T05:43:09.000000Z","updated_at":"2024-01-09T05:43:09.000000Z"}
+/// buku : {"created_at":"2024-03-31T15:37:47.000Z","updated_at":"2024-03-31T15:37:47.000Z","judul":"Lookism","penulis":"Taejoon Park","penerbit":"Webtoon","tahun_terbit":"2020","image":"image/image_1711899467362.jpeg","deskripsi_buku":"Lookism mengisahkan tentang seorang remaja laki-laki bernama Park Hyung Seok yang mengalami bully penampilannya yang dianggap tidak menarik. Bully yang begitu parah membuatnya memutuskan untuk pindah rumah dan sekolah. Tak disangka, keputusan pindah itu ternyata benar-benar mengubah kehidupan Park Hyung Seok.","rating":"9.7","genre":"Aksi"}
 
 class DataPinjam {
   DataPinjam({
-      this.id, 
-      this.userId, 
-      this.bukuId,
-      this.tanggalPinjam, 
-      this.tanggalKembali, 
-      this.status, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.user, 
-      this.book,});
+    this.peminjamanId,
+    this.userId,
+    this.bukuId,
+    this.tanggalPinjam,
+    this.tanggalKembali,
+    this.status,
+    this.buku,});
 
   DataPinjam.fromJson(dynamic json) {
-    id = json['id'];
+    peminjamanId = json['peminjaman_id'];
     userId = json['user_id'];
     bukuId = json['buku_id'];
     tanggalPinjam = json['tanggal_pinjam'];
     tanggalKembali = json['tanggal_kembali'];
     status = json['status'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
-    book = json['book'] != null ? Book.fromJson(json['book']) : null;
+    buku = json['buku'] != null ? Buku.fromJson(json['buku']) : null;
   }
-  int? id;
+  int? peminjamanId;
   String? userId;
   String? bukuId;
   String? tanggalPinjam;
   String? tanggalKembali;
   String? status;
-  String? createdAt;
-  String? updatedAt;
-  User? user;
-  Book? book;
+  Buku? buku;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
+    map['peminjaman_id'] = peminjamanId;
     map['user_id'] = userId;
     map['buku_id'] = bukuId;
     map['tanggal_pinjam'] = tanggalPinjam;
     map['tanggal_kembali'] = tanggalKembali;
     map['status'] = status;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
-    if (user != null) {
-      map['user'] = user?.toJson();
-    }
-    if (book != null) {
-      map['book'] = book?.toJson();
+    if (buku != null) {
+      map['buku'] = buku?.toJson();
     }
     return map;
   }
 
 }
 
-/// id : 1
-/// kategori_id : 1
-/// judul : "Belajar mengenal angka"
-/// penulis : "kusnaidi"
-/// penerbit : "PT alangka"
-/// tahun_terbit : 2024
-/// created_at : "2024-01-09T05:43:09.000000Z"
-/// updated_at : "2024-01-09T05:43:09.000000Z"
+/// created_at : "2024-03-31T15:37:47.000Z"
+/// updated_at : "2024-03-31T15:37:47.000Z"
+/// judul : "Lookism"
+/// penulis : "Taejoon Park"
+/// penerbit : "Webtoon"
+/// tahun_terbit : "2020"
+/// image : "image/image_1711899467362.jpeg"
+/// deskripsi_buku : "Lookism mengisahkan tentang seorang remaja laki-laki bernama Park Hyung Seok yang mengalami bully penampilannya yang dianggap tidak menarik. Bully yang begitu parah membuatnya memutuskan untuk pindah rumah dan sekolah. Tak disangka, keputusan pindah itu ternyata benar-benar mengubah kehidupan Park Hyung Seok."
+/// rating : "9.7"
+/// genre : "Aksi"
 
-class Book {
-  Book({
-      this.id, 
-      this.kategoriId, 
-      this.judul, 
-      this.penulis, 
-      this.penerbit, 
-      this.tahunTerbit, 
-      this.createdAt, 
-      this.updatedAt,});
+class Buku {
+  Buku({
+    this.createdAt,
+    this.updatedAt,
+    this.judul,
+    this.penulis,
+    this.penerbit,
+    this.tahunTerbit,
+    this.image,
+    this.deskripsiBuku,
+    this.rating,
+    this.genre,});
 
-  Book.fromJson(dynamic json) {
-    id = json['id'];
-    kategoriId = json['kategori_id'];
+  Buku.fromJson(dynamic json) {
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
     judul = json['judul'];
     penulis = json['penulis'];
     penerbit = json['penerbit'];
     tahunTerbit = json['tahun_terbit'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    image = json['image'];
+    deskripsiBuku = json['deskripsi_buku'];
+    rating = json['rating'];
+    genre = json['genre'];
   }
-  int? id;
-  String? kategoriId;
+  String? createdAt;
+  String? updatedAt;
   String? judul;
   String? penulis;
   String? penerbit;
   String? tahunTerbit;
-  String? createdAt;
-  String? updatedAt;
+  String? image;
+  String? deskripsiBuku;
+  String? rating;
+  String? genre;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['id'] = id;
-    map['kategori_id'] = kategoriId;
+    map['created_at'] = createdAt;
+    map['updated_at'] = updatedAt;
     map['judul'] = judul;
     map['penulis'] = penulis;
     map['penerbit'] = penerbit;
     map['tahun_terbit'] = tahunTerbit;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
-    return map;
-  }
-
-}
-
-/// id : 2
-/// username : "said"
-/// nama : "said"
-/// telp : "085"
-/// alamat : "alamat"
-/// role : "PEMINJAM"
-/// created_at : "2024-01-09T05:36:44.000000Z"
-/// updated_at : "2024-01-09T05:36:44.000000Z"
-
-class User {
-  User({
-      this.id, 
-      this.username, 
-      this.nama, 
-      this.telp, 
-      this.alamat, 
-      this.role, 
-      this.createdAt, 
-      this.updatedAt,});
-
-  User.fromJson(dynamic json) {
-    id = json['id'];
-    username = json['username'];
-    nama = json['nama'];
-    telp = json['telp'];
-    alamat = json['alamat'];
-    role = json['role'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-  }
-  int? id;
-  String? username;
-  String? nama;
-  String? telp;
-  String? alamat;
-  String? role;
-  String? createdAt;
-  String? updatedAt;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['id'] = id;
-    map['username'] = username;
-    map['nama'] = nama;
-    map['telp'] = telp;
-    map['alamat'] = alamat;
-    map['role'] = role;
-    map['created_at'] = createdAt;
-    map['updated_at'] = updatedAt;
+    map['image'] = image;
+    map['deskripsi_buku'] = deskripsiBuku;
+    map['rating'] = rating;
+    map['genre'] = genre;
     return map;
   }
 

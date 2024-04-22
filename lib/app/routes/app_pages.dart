@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:peminjam_perpustakaan_kelasc/app/modules/list_peminjaman/bindings/list_peminjaman_binding.dart';
+import 'package:peminjam_perpustakaan_kelasc/app/modules/list_peminjaman/views/list_peminjaman_view.dart';
 
 import '../modules/add_peminjaman/bindings/add_peminjaman_binding.dart';
 import '../modules/add_peminjaman/views/add_peminjaman_view.dart';
@@ -10,8 +12,6 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
-import '../modules/peminjaman/bindings/peminjaman_binding.dart';
-import '../modules/peminjaman/views/peminjaman_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/register/bindings/register_binding.dart';
@@ -46,31 +46,24 @@ class AppPages {
       binding: BookBinding(),
     ),
     GetPage(
-      name: _Paths.PEMINJAMAN,
-      page: () => const PeminjamanView(),
-      binding: PeminjamanBinding(),
+      name: _Paths.LIST_PEMINJAMAN,
+      page: () => const ListPeminjamanView(),
+      binding: ListPeminjamanBinding(),
     ),
     GetPage(
       name: _Paths.ADD_PEMINJAMAN,
       page: () => const AddPeminjamanView(),
       binding: AddPeminjamanBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.PROFILE,
-    //   page: () => const ProfileView(),
-    //   binding: ProfileBinding(),
-    // ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => const ProfileView(),
+      binding: ProfileBinding(),
+    ),
     GetPage(
       name: _Paths.DETAIL_BUKU,
       page: () => const DetailBukuView(),
       binding: DetailBukuBinding(),
-      children: [
-        GetPage(
-          name: _Paths.PROFILE,
-          page: () => const ProfileView(),
-          binding: ProfileBinding(),
-        ),
-      ],
     ),
   ];
 }

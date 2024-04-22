@@ -186,6 +186,18 @@ class RegisterView extends GetView<RegisterController> {
                         },
                       )),
                       SizedBox(height: 20),
+                      Obx(() => controller.loading.value
+                          ? CircularProgressIndicator()
+                          : ElevatedButton(
+                          onPressed: () {
+                            controller.register();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            primary: HexColor('#286291'),
+                            minimumSize: Size(double.infinity, 50),
+                          ),
+                          child: Text("Register"))),
+                      SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -207,18 +219,6 @@ class RegisterView extends GetView<RegisterController> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
-                      Obx(() => controller.loading.value
-                          ? CircularProgressIndicator()
-                          : ElevatedButton(
-                          onPressed: () {
-                            controller.register();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            primary: HexColor('#286291'),
-                            minimumSize: Size(double.infinity, 50),
-                          ),
-                          child: Text("Register"))),
                       SizedBox(height: 10),
                     ],
                   ),
