@@ -91,10 +91,10 @@ class _HomeViewStfulState extends State<HomeViewStful> {
 
 class screenHome extends StatelessWidget {
   const screenHome({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final HomeController homeController = Get.put(HomeController());
+
     return Scaffold(
       body: ListView(
         children: [

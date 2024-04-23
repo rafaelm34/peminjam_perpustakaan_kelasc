@@ -110,15 +110,15 @@ class ListPeminjamanView extends GetView<ListPeminjamanController> {
                                 ),
                               ),
                               SizedBox(height: 2,),
-                              // Text("NOTE : \n${dataPeminjaman.status == "DENDA"
-                              //     ? "Kamu terkena denda sebesar            Rp ${dataPeminjaman.denda}"
-                              //     : "Kembalikan buku pada tepat waktu"}",
-                              //   style: GoogleFonts.poppins(
-                              //     fontSize: 13,
-                              //     // fontWeight: FontWeight.w500,
-                              //     color: Colors.white,
-                              //   ),
-                              // ),
+                              Text("NOTE : \n${dataPinjam.status == "DENDA"
+                                  ? "Kamu terkena denda sebesar            Rp ${dataPinjam.denda}"
+                                  : "Kembalikan buku pada tepat waktu"}",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 13,
+                                  // fontWeight: FontWeight.w500,
+                                  color: Colors.blue,
+                                ),
+                              ),
 
                             ],
                           ),

@@ -38,31 +38,45 @@ class AddPeminjamanController extends GetxController {
       FocusScope.of(Get.context!).unfocus();
       formKey.currentState?.save();
       if (formKey.currentState!.validate()) {
-        final response = await ApiProvider.instance().post(Endpoint.pinjam,
-            data: {
-              "user_id": StorageProvider.read(StorageKey.userId),
-              "buku_id": Get.parameters['id'].toString(),
-              "tanggal_pinjam": tanggalPinjamController.text.toString(),
-              "tanggal_kembali": tanggalKembaliController.text.toString(),
-            });
-        if (response.statusCode == 200) {
-          Get.toNamed(
-            Routes.LIST_PEMINJAMAN,
-            parameters: {
-              'id': '${Get.parameters['id'].toString()}',
-              'judul': '${Get.parameters['judul']}',
-              'image': '${Get.parameters['image']}',
-              'penulis': '${Get.parameters['penulis']}',
-              'penerbit': '${Get.parameters['penerbit']}',
-              'tahun_terbit': '${Get.parameters['tahun_terbit']}',
-              'deskripsi_buku': '${Get.parameters['deskripsi_buku']}',
-              'nama_kategory': '${Get.parameters['nama_kategory']}',
-              'rating': '${Get.parameters['rating']}',
-            },
-          );
-          Get.offAllNamed(Routes.HOME);
+        DateTime tanggalPinjam = DateTime.parse(tanggalPinjamController.text);
+        DateTime tanggalKembali = DateTime.parse(tanggalKembaliController.text);
+
+        // Membuat tanggal kembali tidak lebih dari 2 minggu dari tanggal pinjam
+        if (tanggalKembali.difference(tanggalPinjam).inDays <= 14) {
+          final response = await ApiProvider.instance().post(Endpoint.pinjam,
+              data: {
+                "user_id": StorageProvider.read(StorageKey.userId),
+                "buku_id": Get.parameters['id'].toString(),
+                "tanggal_pinjam": tanggalPinjamController.text.toString(),
+                "tanggal_kembali": tanggalKembaliController.text.toString(),
+              });
+          if (response.statusCode == 200) {
+            Get.toNamed(
+              Routes.LIST_PEMINJAMAN,
+              parameters: {
+                'id': '${Get.parameters['id'].toString()}',
+                'judul': '${Get.parameters['judul']}',
+                'image': '${Get.parameters['image']}',
+                'penulis': '${Get.parameters['penulis']}',
+                'penerbit': '${Get.parameters['penerbit']}',
+                'tahun_terbit': '${Get.parameters['tahun_terbit']}',
+                'deskripsi_buku': '${Get.parameters['deskripsi_buku']}',
+                'nama_kategory': '${Get.parameters['nama_kategory']}',
+                'rating': '${Get.parameters['rating']}',
+              },
+            );
+            Get.offAllNamed(Routes.HOME);
+            // Menampilkan snackbar berhasil
+            Get.snackbar("Success", "Buku berhasil dipinjam",
+              backgroundColor: Colors.lightGreen,
+              // snackPosition: SnackPosition.BOTTOM,
+            );
+          } else {
+            Get.snackbar("Sorry", "Tambah Pinjam Gagal", backgroundColor: Colors.orange);
+          }
         } else {
-          Get.snackbar("Sorry", "Tambah Pinjam Gagal", backgroundColor: Colors.orange);
+          Get.snackbar("Sorry", "Anda hanya bisa meminjam buku selama 2 minggu",
+              backgroundColor: Colors.orange);
         }
       }
       loading(false);
@@ -81,6 +95,7 @@ class AddPeminjamanController extends GetxController {
       Get.snackbar("Error", e.toString(), backgroundColor: Colors.red);
     }
   }
+
 
   void increment() => count.value++;
 }

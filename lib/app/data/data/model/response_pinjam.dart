@@ -49,8 +49,10 @@ class DataPinjam {
     this.bukuId,
     this.tanggalPinjam,
     this.tanggalKembali,
+    this.denda,
     this.status,
-    this.buku,});
+    this.buku,
+  });
 
   DataPinjam.fromJson(dynamic json) {
     peminjamanId = json['peminjaman_id'];
@@ -58,6 +60,7 @@ class DataPinjam {
     bukuId = json['buku_id'].toString();
     tanggalPinjam = json['tanggal_pinjam'];
     tanggalKembali = json['tanggal_kembali'];
+    denda = json['denda'].toString();
     status = json['status'];
     buku = json['buku'] != null ? Buku.fromJson(json['buku']) : null;
   }
@@ -66,6 +69,7 @@ class DataPinjam {
   String? bukuId;
   String? tanggalPinjam;
   String? tanggalKembali;
+  String? denda;
   String? status;
   Buku? buku;
 
@@ -76,6 +80,7 @@ class DataPinjam {
     map['buku_id'] = bukuId;
     map['tanggal_pinjam'] = tanggalPinjam;
     map['tanggal_kembali'] = tanggalKembali;
+    map['denda'] = denda;
     map['status'] = status;
     if (buku != null) {
       map['buku'] = buku?.toJson();
